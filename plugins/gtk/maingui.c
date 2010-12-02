@@ -227,7 +227,7 @@ static void unflash_window(GtkWidget *win) {
 int fe_gui_info(window_t *sess, int info_type) {	/* code from fe-gtk.c */
 	switch (info_type) {
 		case 0:	/* window status */
-			if (!GTK_WIDGET_VISIBLE(GTK_WINDOW(gtk_private_ui(sess)->window)))
+			if (!gtk_widget_get_visible(GTK_WINDOW(gtk_private_ui(sess)->window)))
 				return 2;	/* hidden (iconified or systray) */
 
 #warning "GTK issue."
@@ -514,8 +514,8 @@ void mg_set_topic_tip(session *sess) {
 #endif
 
 static void mg_hide_empty_pane(GtkPaned * pane) {
-	if ((pane->child1 == NULL || !GTK_WIDGET_VISIBLE(pane->child1)) &&
-	    (pane->child2 == NULL || !GTK_WIDGET_VISIBLE(pane->child2))) {
+	if ((pane->child1 == NULL || !gtk_widget_get_visible(pane->child1)) &&
+	    (pane->child2 == NULL || !gtk_widget_get_visible(pane->child2))) {
 		gtk_widget_hide(GTK_WIDGET(pane));
 		return;
 	}
@@ -1553,9 +1553,9 @@ mg_rightpane_cb(GtkPaned * pane, GParamSpec * param, gtk_window_ui_t* gui)
 {
 	int handle_size;
 
-/*	if (pane->child1 == NULL || (!GTK_WIDGET_VISIBLE (pane->child1)))
+/*	if (pane->child1 == NULL || (!gtk_widget_get_visible (pane->child1)))
 		return;
-	if (pane->child2 == NULL || (!GTK_WIDGET_VISIBLE (pane->child2)))
+	if (pane->child2 == NULL || (!gtk_widget_get_visible (pane->child2)))
 		return;*/
 
 	gtk_widget_style_get(GTK_WIDGET(pane), "handle-size", &handle_size, NULL);

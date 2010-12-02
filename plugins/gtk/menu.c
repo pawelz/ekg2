@@ -167,7 +167,7 @@ static void menu_about(GtkWidget *wid, gpointer sess) {
 	gtk_container_add(GTK_CONTAINER(vbox), hbox);
 
 	wid = gtk_button_new_from_stock(GTK_STOCK_CLOSE);
-	GTK_WIDGET_SET_FLAGS(GTK_WIDGET(wid), GTK_CAN_DEFAULT);
+	gtk_widget_set_can_default(GTK_WIDGET(wid), TRUE);
 	gtk_dialog_add_action_widget(GTK_DIALOG(about), wid, GTK_RESPONSE_OK);
 	gtk_widget_grab_default(wid);
 

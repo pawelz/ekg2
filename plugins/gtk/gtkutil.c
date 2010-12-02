@@ -479,7 +479,7 @@ add_tip(GtkWidget *wid, char *text)
 void
 show_and_unfocus(GtkWidget *wid)
 {
-	GTK_WIDGET_UNSET_FLAGS(wid, GTK_CAN_FOCUS);
+	gtk_widget_set_can_focus(wid, FALSE);
 	gtk_widget_show(wid);
 }
 

@@ -1799,7 +1799,7 @@ mg_create_entry(window_t *sess, GtkWidget *box)
 #endif
 	gui->nick_label = but =	gtk_button_new_with_label(gtk_session_target(sess->session));
 	gtk_button_set_relief(GTK_BUTTON(but), GTK_RELIEF_NONE);
-	GTK_WIDGET_UNSET_FLAGS(but, GTK_CAN_FOCUS);
+	gtk_widget_set_can_focus(but, FALSE);
 	gtk_box_pack_end(GTK_BOX(gui->nick_box), but, 0, 0, 0);
 	g_signal_connect(G_OBJECT(but), "clicked", G_CALLBACK(mg_sessionclick_cb), NULL);
 

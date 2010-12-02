@@ -815,7 +815,7 @@ static void gtk_xtext_realize(GtkWidget *widget)
 	GdkColor col;
 	GdkColormap *cmap;
 
-	GTK_WIDGET_SET_FLAGS(widget, GTK_REALIZED);
+	gtk_widget_set_realized(widget, TRUE);
 	xtext = GTK_XTEXT(widget);
 
 	attributes.x = widget->allocation.x;

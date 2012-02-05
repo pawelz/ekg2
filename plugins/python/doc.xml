@@ -99,10 +99,48 @@
             </listitem>
          </varlistentry>
          <varlistentry>
-            <term>variable_add( nazwa_zmiennej, pocz±tkowa_warto¶æ [, callback ])</term>
+            <term>variable_add_bool( nazwa_zmiennej, pocz±tkowa_warto¶æ [, callback ])</term>
             <listitem>
                <para>
-                  Dodaje zmienn± skryptow±, która bêdzie zapisywana w pliku
+                  Dodaje zmienn± skryptow± typu bool, która bêdzie zapisywana w pliku
+                  konfiguracyjnym ekg2. Opcjonalny parametr
+                  <parameter>callback</parameter> mo¿e
+                  zawieraæ funkcjê, która bêdzie wykonywana przy ka¿dej zmianie
+                  warto¶ci dodawanej zmiennej.
+                  Funkcja musi przyjmowaæ dwa argumenty: nazwê zmiennej i jej
+                  now± warto¶æ.
+               </para>
+               <para>
+                  Zmienne dodane metod± variable_add mo¿na odczytywaæ tak, jak
+                  wszystkie inne ustawienia konfiguracyjne, tj. za pomoc±
+                  s³ownika <varname>ekg.config</varname>
+               </para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>variable_add_int( nazwa_zmiennej, pocz±tkowa_warto¶æ [, callback ])</term>
+            <listitem>
+               <para>
+                  Dodaje zmienn± skryptow± typu integer, która bêdzie zapisywana w pliku
+                  konfiguracyjnym ekg2. Opcjonalny parametr
+                  <parameter>callback</parameter> mo¿e
+                  zawieraæ funkcjê, która bêdzie wykonywana przy ka¿dej zmianie
+                  warto¶ci dodawanej zmiennej.
+                  Funkcja musi przyjmowaæ dwa argumenty: nazwê zmiennej i jej
+                  now± warto¶æ.
+               </para>
+               <para>
+                  Zmienne dodane metod± variable_add mo¿na odczytywaæ tak, jak
+                  wszystkie inne ustawienia konfiguracyjne, tj. za pomoc±
+                  s³ownika <varname>ekg.config</varname>
+               </para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>variable_add_str( nazwa_zmiennej, pocz±tkowa_warto¶æ [, callback ])</term>
+            <listitem>
+               <para>
+                  Dodaje zmienn± skryptow± typu string, która bêdzie zapisywana w pliku
                   konfiguracyjnym ekg2. Opcjonalny parametr
                   <parameter>callback</parameter> mo¿e
                   zawieraæ funkcjê, która bêdzie wykonywana przy ka¿dej zmianie

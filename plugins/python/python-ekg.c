@@ -138,20 +138,42 @@ PyObject *ekg_cmd_command(PyObject * self, PyObject * args)
 }
 
 /**
- * ekg_cmd_variable_add()
+ * _ekg_cmd_variable_add()
  *
  */
 
-PyObject *ekg_cmd_variable_add(PyObject * self, PyObject * args)
+PyObject *_ekg_cmd_variable_add(PyObject * self, PyObject * args, int type)
 {
 	PyObject *callback = NULL;
 	PyObject *module   = NULL;
 	char *name = NULL;
 	char *val  = NULL;
 	script_t * scr = NULL;
+	char *argsspec = NULL;
 
-	if (!PyArg_ParseTuple(args, "ss|O", &name, &val, &callback)) {
-		return NULL;
+	switch(type) {
+		case VAR_BOOL:
+			argsspec = "sb|O";
+			char valchar;
+			if (!PyArg_ParseTuple(args, argsspec, &name, &valchar, &callback)) {
+				return NULL;
+			}
+			val = valchar ? ekg_itoa(1) : ekg_itoa(0);
+			break;
+		case VAR_INT:
+			argsspec = "sl|O";
+			long int valint;
+			if (!PyArg_ParseTuple(args, argsspec, &name, &valint, &callback)) {
+				return NULL;
+			}
+			val = ekg_itoa(valint);
+			break;
+		case VAR_STR:
+			argsspec = "ss|O";
+			if (!PyArg_ParseTuple(args, argsspec, &name, &val, &callback)) {
+				return NULL;
+			}
+			break;
 	}
 
 	if (callback) {
@@ -165,10 +187,40 @@ PyObject *ekg_cmd_variable_add(PyObject * self, PyObject * args)
 		scr = python_find_script(module);
 	}
 
-	script_var_add(&python_lang, scr, name, val, callback);
+	script_var_add_full(&python_lang, scr, name, type, val, callback);
 
 	Py_INCREF(Py_None);
 	return Py_None;
+}
+
+/**
+ * ekg_cmd_variable_add_bool()
+ *
+ */
+
+PyObject *ekg_cmd_variable_add_bool(PyObject * self, PyObject * args)
+{
+	return _ekg_cmd_variable_add(self, args, VAR_BOOL);
+}
+
+/**
+ * ekg_cmd_variable_add_int()
+ *
+ */
+
+PyObject *ekg_cmd_variable_add_int(PyObject * self, PyObject * args)
+{
+	return _ekg_cmd_variable_add(self, args, VAR_INT);
+}
+
+/**
+ * ekg_cmd_variable_add_str()
+ *
+ */
+
+PyObject *ekg_cmd_variable_add_str(PyObject * self, PyObject * args)
+{
+	return _ekg_cmd_variable_add(self, args, VAR_STR);
 }
 
 /**
